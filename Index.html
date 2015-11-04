@@ -26,7 +26,28 @@
             var apple;
             var userscore;
             var mySnakeArray;
-        
+   
+           function start() {
+                defaultRun = "right";
+                createSnake();
+                createApple();
+                userscore = 0;
+               
+//clears background and repaints snake every 70ms 
+if (typeof game_loop != "undefined") clearInterval(game_loop);
+                game_loop = setInterval(paintSnake, 70);
+            }
+            start();
+ 
+//Creates a snake 5 cells long and adds cells to back of snake to increase length
+           function createSnake() {
+                var snakeSize = 6;
+                mySnakeArray = [];
+                for (var s = 0; s<snakeSize-1;s++) {
+                    mySnakeArray.push({ x: 0, y: 20 });
+                }
+            } 
+            
     </script>
    </head> 
     <body>
