@@ -17,7 +17,7 @@
         $(document).ready(function () {
             //Canvas variables
             var drawCanvas = $("#drawCanvas")[0];
-            var context = drawCanvas.getContext("2d");
+            var ctx = drawCanvas.getCtx("2d");
             var width = $("#drawCanvas").width();
             var height = $("#drawCanvas").height();
             var cell_width = 15;
@@ -55,6 +55,15 @@ if (typeof game_loop != "undefined") clearInterval(game_loop);
                     y: Math.round(Math.random() * (height -                               cell_width) / cell_width),
                 };
              }
+            
+        
+//paints the game background pink and the border blue
+            function paintSnake() {
+            ctx.fillStyle = "#FFCCFF";
+            ctx.fillRect(0, 0, width, height);
+            ctt.strokeStyle = "#3300FF";
+            ctx.strokeRect(0, 0, width, height);
+
             
     </script>
    </head> 
