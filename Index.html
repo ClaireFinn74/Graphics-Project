@@ -56,7 +56,6 @@ if (typeof game_loop != "undefined") clearInterval(game_loop);
                 };
              }
             
-        
 //paints the game background pink and the border blue
             function paintSnake() {
             ctx.fillStyle = "#FFCCFF";
@@ -64,6 +63,16 @@ if (typeof game_loop != "undefined") clearInterval(game_loop);
             ctt.strokeStyle = "#3300FF";
             ctx.strokeRect(0, 0, width, height);
 
+//this makes it easier to use x and y in the future
+                var pop_x = mySnakeArray[0].x;
+                var pop_y = mySnakeArray[0].y;
+ 
+//these allow snake to run up, down, left and right
+                if (defaultRun == "right") pop_x++;
+                else if (defaultRun == "left") pop_x--;
+                else if (defaultRun == "down") pop_y++;
+                else if (defaultRun == "up") pop_y--;  
+                
             
     </script>
    </head> 
