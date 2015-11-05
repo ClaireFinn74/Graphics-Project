@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title> Snake </title>
+    <title> Snake Game </title>
     <style type="text/css">
         body {
             margin: 0 auto;
@@ -15,18 +15,19 @@
     <script>
         
         $(document).ready(function () {
-            //Canvas variables
+            //Canvas variables to be used within the game
             var drawCanvas = $("#drawCanvas")[0];
             var ctx = drawCanvas.getCtx("2d");
             var width = $("#drawCanvas").width();
             var height = $("#drawCanvas").height();
             var cell_width = 15;
             var defaultRun;
-            //Snake's food
+            //Snake's food will be an apple in the game
             var apple;
             var userscore;
             var mySnakeArray;
    
+//Starts the game and defaults the snake to run right by default when the game starts 
            function start() {
                 defaultRun = "right";
                 createSnake();
@@ -67,20 +68,20 @@ if (typeof game_loop != "undefined") clearInterval(game_loop);
                 var pop_x = mySnakeArray[0].x;
                 var pop_y = mySnakeArray[0].y;
  
-//these allow snake to run up, down, left and right
+//these allow snake to run up, down, left and right in the game
                 if (defaultRun == "right") pop_x++;
                 else if (defaultRun == "left") pop_x--;
                 else if (defaultRun == "down") pop_y++;
                 else if (defaultRun == "up") pop_y--;  
 
-// covering all areas making sure everything stays within the border
+// covering all areas making sure everything stays within the borders of the game
 if (pop_x == -1 || pop_x == width / cell_width || pop_y == -1 || pop_y == height / cell_width || check_collision(pop_x, pop_y, mySnakeArray)) 
                  {
                      start();
                      return;
                  }
                 
- //Updates score when an apple is eaten and creates a new apple, also handles the snake colliding with itself to end the game                
+ //Updates score to add 1 when an apple is eaten and creates a new apple, also handles the snake colliding with itself to end the game                
                 if (pop_x == snake_apple.x && pop_y == snake_apple.y) {
                     var snake_tail = { x: pop_x, y: pop_y };
                     userscore++;
@@ -99,19 +100,40 @@ if (pop_x == -1 || pop_x == width / cell_width || pop_y == -1 || pop_y == height
                 
                     paintCell(o.x, o.y);
                 }
- //Writing score
+ //Writes score to the screen and also paints it
   paintCell(snake_food.x, snake_food.y);
                
                 var score_text = "Score: " + userscore;
                 ctx.fillText(score_text, width-50, 20);
+            }
 
-//Paints snake
+//Paints snake cells to orange and the borders of the cells to red
     function paintCell(x, y) {
         ctx.fillStyle = "orange";
         ctx.fillRect(x * cell_width, y * cell_width, cell_width,        cell_width);
         ctx.strokeStyle = "red";
         ctx.strokeRect(x * cell_width, y * cell_width, cell_width,      cell_width);
     }
+
+//Some collision detection to ensure that the snake stays within the borders of the game
+    function check_collision(x, y, array) {
+        for (var i = 0; i < array.length; i++) {
+               if (array[i].x == x && array[i].y == y)
+                     return true;
+                }
+                return false;
+            }
+
+//Ensures that the user can input so that when you press the up, down, left and right arrow keys that the snake moves in those directions
+$(document).keypress(function (e) {
+                var keyInput = e.which;
+                if (keyInput == "40" && defaultRun != "up") defaultRun = "down";
+                else if (keyInput == "37" && defaultRun != "right") defaultRun = "left";
+                else if (keyInput == "39" && defaultRun != "left") defaultRun = "right";
+                else if (keyInput == "38" && defaultRun != "down") defaultRun = "up";
+            })
+        })
+ 
 
     </script>
    </head> 
