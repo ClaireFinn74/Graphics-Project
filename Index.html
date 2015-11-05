@@ -72,7 +72,25 @@ if (typeof game_loop != "undefined") clearInterval(game_loop);
                 else if (defaultRun == "left") pop_x--;
                 else if (defaultRun == "down") pop_y++;
                 else if (defaultRun == "up") pop_y--;  
+
+// covering all areas making sure everything stays within the border
+if (pop_x == -1 || pop_x == width / cell_width || pop_y == -1 || pop_y == height / cell_width || check_collision(pop_x, pop_y, mySnakeArray)) 
+                 {
+                     start();
+                     return;
+                 }
                 
+ //Updates score when an apple is eaten and creates a new apple, also handles the snake colliding with itself to end the game                
+                if (pop_x == snake_apple.x && pop_y == snake_apple.y) {
+                    var snake_tail = { x: pop_x, y: pop_y };
+                    userscore++;
+                     createApple();
+                }
+                else {
+                    var snake_tail = mySnakeArray.pop();
+                    snake_tail.x = pop_x; snake_tail.y = pop_y;
+                }
+
             
     </script>
    </head> 
