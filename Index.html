@@ -1,18 +1,12 @@
 <!DOCTYPE html>
- 
-
 <html>
 <head>
+   <meta charset="UTF-8"> 
     <title> Snake Game </title>
-    <style type="text/css">
-        body {
-            margin: 0 auto;
-            padding : 0;
-        }
+    <link rel="Stylesheet" type="text/css"href="Index.css" />
+
     </style>
     
-    
-    <!-- Jquery -->
     <script    src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script>
        $(document).ready(function () {
@@ -21,7 +15,6 @@
             var ctx = drawCanvas.getContext("2d");
             var width = $("#drawCanvas").width();
             var height = $("#drawCanvas").height();
- 
            var cell_width = 15;
             var defaultRun;
            //Snake's food will be an apple in the game
@@ -35,13 +28,16 @@
                 createSnake();
                 createApple();
                 userscore = 0;
+               
 
 //clears background and repaints snake every 70ms     
                 if (typeof game_loop != "undefined") clearInterval(game_loop);
                 game_loop = setInterval(paintSnake, 70);
             }
+          
             start();
  
+
 //Creates a snake 5 cells long and adds cells to back of snake to increase length
             function createSnake() {
                 var snakeSize = 6;
@@ -119,6 +115,8 @@
         ctx.strokeRect(x * cell_width, y * cell_width, cell_width,      cell_width);
     }
  
+      
+
  //Some collision detection to ensure that the snake stays within the borders of the game
             function check_collision(x, y, array) {
         for (var i = 0; i < array.length; i++) {
@@ -129,7 +127,7 @@
             }
   
 //Ensures that the user can input so that when you press the up, down, left and right arrow keys that the snake moves in those directions
-        $(document).keypress(function (e) {
+        $(document).keydown(function (e) {
                 var keyInput = e.which;
                 if (keyInput == "40" && defaultRun != "up") defaultRun = "down";
                 else if (keyInput == "37" && defaultRun != "right") defaultRun = "left";
@@ -137,13 +135,20 @@
                 else if (keyInput == "38" && defaultRun != "down") defaultRun = "up";
             })
         })
- 
+       
+       
    </script>
 </head>
+    
 <body>
+    
         <div>
-            //Canvas has to be 600 as even if it is 550 the collision detection messes up abd the snake runs right through the wall on the right hand side
-             <canvas id="drawCanvas" width="600" height="600"></canvas>
-        </div>
+ <!-- Canvas has to be 600 as even if it is 550 the collision detection messes up abd the snake runs right through the wall on the right hand side -->
+          <canvas id="drawCanvas" width="600" height="600"></canvas>
+   <!--  <menu> -->
+         <!-- <button class='start'> Start Snake! </button> -->
+         <!-- <button class='pause'>  Pause Snake! </button> -->
+        <!--   </menu>  -->
+    </div>
 </body>
 </html>
