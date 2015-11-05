@@ -99,9 +99,20 @@ if (pop_x == -1 || pop_x == width / cell_width || pop_y == -1 || pop_y == height
                 
                     paintCell(o.x, o.y);
                 }
- 
+ //Writing score
+  paintCell(snake_food.x, snake_food.y);
                
-            
+                var score_text = "Score: " + userscore;
+                ctx.fillText(score_text, width-50, 20);
+
+//Paints snake
+    function paintCell(x, y) {
+        ctx.fillStyle = "orange";
+        ctx.fillRect(x * cell_width, y * cell_width, cell_width,        cell_width);
+        ctx.strokeStyle = "red";
+        ctx.strokeRect(x * cell_width, y * cell_width, cell_width,      cell_width);
+    }
+
     </script>
    </head> 
     <body>
