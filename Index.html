@@ -91,6 +91,16 @@ if (pop_x == -1 || pop_x == width / cell_width || pop_y == -1 || pop_y == height
                     snake_tail.x = pop_x; snake_tail.y = pop_y;
                 }
 
+//Ensures that new cell is added to back of snake rather than front and also paints the added cell
+               mySnakeArray.unshift(snake_tail);
+ 
+                for (var i = 0; i < mySnakeArray.length; i++) {
+                    var o = mySnakeArray[i];
+                
+                    paintCell(o.x, o.y);
+                }
+ 
+               
             
     </script>
    </head> 
