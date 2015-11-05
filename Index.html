@@ -58,9 +58,9 @@
  
    //paints the game background pink and the border blue        
             function paintSnake() {
-            ctx.fillStyle = "#FFCCFF";
+            ctx.fillStyle = "#FFCC33";
             ctx.fillRect(0, 0, width, height);
-            ctx.strokeStyle = "#3300FF";
+            ctx.strokeStyle = "#000000";
             ctx.strokeRect(0, 0, width, height);
     
     //this makes it easier to use x and y in the future
@@ -113,9 +113,9 @@
 
  //Paints snake cells to orange and the borders of the cells to red
            function paintCell(x, y) {
-        ctx.fillStyle = "orange";
+        ctx.fillStyle = "rgba(176,0,0,1)"
         ctx.fillRect(x * cell_width, y * cell_width, cell_width,        cell_width);
-        ctx.strokeStyle = "red";
+        ctx.strokeStyle = "black";
         ctx.strokeRect(x * cell_width, y * cell_width, cell_width,      cell_width);
     }
  
@@ -147,7 +147,7 @@
 <body>
     
         <div>
- <!-- Canvas has to be 600 as even if it is 550 the collision detection messes up abd the snake runs right through the wall on the right hand side -->
+ <!-- Canvas has to be 600 as even if it is 550 the collision detection messes up and the snake runs right through the wall on the right hand side -->
           <canvas id="drawCanvas" width="600" height="600"></canvas>
    <!--  <menu> -->
          <!-- <button class='start'> Start Snake! </button> -->

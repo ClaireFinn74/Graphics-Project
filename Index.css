@@ -1,6 +1,13 @@
-  body {
-      background-color: deepskyblue;
-            margin: 0 auto;
-            padding : 0;
-        }
+  
 
+html {
+	background-image:
+		-webkit-linear-gradient(top, #87CEEB 0%, #7CFC00 100%);
+
+body {
+      background-color: ;
+            margin: 0 auto;
+            padding : 500;
+    
+    }
+  
