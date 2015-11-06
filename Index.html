@@ -12,7 +12,7 @@
 $(document).ready(function ()
 {
     //Canvas variables to be used within the game
-    //draws the canva
+    //draws the canvas
     var drawCanvas = $("#drawCanvas")[0];
     var ctx = drawCanvas.getContext("2d"); 
     //this draws the width of the canvas
@@ -28,6 +28,8 @@ $(document).ready(function ()
     var userscore;
     //This will be the name of the snake throughout
     var mySnakeArray;
+    //Snake's extra food will be a cherry in the game
+    var cherry;
 
 //Starts the game and allows the snake to run right by default when the game starts 
    function start()
@@ -35,6 +37,7 @@ $(document).ready(function ()
     defaultRun = "right";
     createSnake();
     createApple();
+    createCherry();
     userscore = 0;
 
 
@@ -61,6 +64,16 @@ $(document).ready(function ()
     function createApple()
     {
     snake_apple =
+        {
+     x: Math.round(Math.random() * (width - cell_width) /                                                      cell_width),
+     y: Math.round(Math.random() * (height -                                                                  cell_width) / cell_width),
+        };
+    }
+    
+    //creates the snake's cherry and keeps it within the borders
+    function createCherry()
+    {
+    snake_cherry =
         {
      x: Math.round(Math.random() * (width - cell_width) /                                                      cell_width),
      y: Math.round(Math.random() * (height -                                                                  cell_width) / cell_width),
@@ -105,6 +118,12 @@ $(document).ready(function ()
            userscore=userscore+50;
            createApple();
       }
+      else if (pop_x == snake_cherry.x && pop_y == snake_cherry.y)
+      {
+           var snake_tail = { x: pop_x, y: pop_y };
+           userscore=userscore+50;
+           createCherry();
+      }
         else
       {
         var snake_tail = mySnakeArray.pop();
@@ -122,6 +141,7 @@ $(document).ready(function ()
 
 //Writes score to the screen every time the snake eats an apple and also paints it
         paintCell(snake_apple.x, snake_apple.y);
+        paintCell(snake_cherry.x, snake_cherry.y);
           var score_text = "Score: " + userscore;
           ctx.fillText(score_text, width-200, 20);
 //Writes the Snake size to the screen every time a new cell is added to it to add extra functionality to the game
@@ -150,7 +170,7 @@ $(document).ready(function ()
 
  //Some collision detection to ensure that the snake stays within the borders of the game
         function check_collision(x, y, array)
-       {
+        {
         for (var i = 0; i < array.length; i++) 
         {
             if (array[i].x == x && array[i].y == y)
@@ -180,6 +200,7 @@ $(document).keydown(function (e)
         <div>
  <!--  Draws the canvas at 600X600 -->
           <canvas id="drawCanvas" height="600" width="600" > </canvas>
+<!--attempt at start and pause buttons -->
    <!--  <menu> -->
          <!-- <button class='start'> Start Snake! </button> -->
          <!-- <button class='pause'>  Pause Snake! </button> -->
