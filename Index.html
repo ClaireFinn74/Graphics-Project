@@ -31,6 +31,7 @@ $(document).ready(function ()
     //Snake's extra food in the game
     var cherry;
     var tomato;
+    var strawberry;
 
 //Starts the game and allows the snake to run right by default when the game starts 
    function start()
@@ -40,6 +41,7 @@ $(document).ready(function ()
     createApple();
     createCherry();
     createTomato();
+    createStrawberry();
     userscore = 0;
 
 
@@ -91,6 +93,16 @@ $(document).ready(function ()
      y: Math.round(Math.random() * (height -                                                                  cell_width) / cell_width),
         };
     }
+    
+     function createStrawberry()
+    {
+    snake_Strawberry =
+        {
+     x: Math.round(Math.random() * (width - cell_width) /                                                      cell_width),
+     y: Math.round(Math.random() * (height -                                                                  cell_width) / cell_width),
+        };
+    }
+            
             
 //paints the game background       
     function paintSnake()
@@ -142,6 +154,13 @@ $(document).ready(function ()
            userscore=userscore+50;
            createTomato();
       }
+      else if (pop_x == snake_Strawberry.x && pop_y == snake_Strawberry.y)
+      {
+           var snake_tail = { x: pop_x, y: pop_y };
+           userscore=userscore+50;
+           createStrawberry();
+      }
+        
         else
       {
         var snake_tail = mySnakeArray.pop();
@@ -161,6 +180,7 @@ $(document).ready(function ()
         paintCell(snake_apple.x, snake_apple.y);
         paintCell(snake_cherry.x, snake_cherry.y);
         paintCell(snake_Tomato.x, snake_Tomato.y);
+        paintCell(snake_Strawberry.x, snake_Strawberry.y);
           var score_text = "Score: " + userscore;
           ctx.fillText(score_text, width-200, 20);
 //Writes the Snake size to the screen every time a new cell is added to it to add extra functionality to the game
