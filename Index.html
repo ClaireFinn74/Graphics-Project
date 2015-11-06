@@ -14,8 +14,10 @@ $(document).ready(function ()
     //Canvas variables to be used within the game
     //draws the canva
     var drawCanvas = $("#drawCanvas")[0];
-    var ctx = drawCanvas.getContext("2d");
+    var ctx = drawCanvas.getContext("2d"); 
+    //this draws the width of the canvas
     var width = $("#drawCanvas").width();
+    //this draws the height of the canvas
     var height = $("#drawCanvas").height();
     var cell_width = 15;
     //A variable to make Snake run right by default
@@ -78,8 +80,9 @@ $(document).ready(function ()
     var pop_x = mySnakeArray[0].x;
     var pop_y = mySnakeArray[0].y;
   
-//these allow snake to run up, down, left and right in the game
+//this allows snake to run right at first by default in the game
     if (defaultRun == "right") pop_x++;
+//this allows snake to run up, down or left
          else if (defaultRun == "left") pop_x--;
          else if (defaultRun == "down") pop_y++;
          else if (defaultRun == "up") pop_y--;
@@ -121,10 +124,11 @@ $(document).ready(function ()
         paintCell(snake_apple.x, snake_apple.y);
           var score_text = "Score: " + userscore;
           ctx.fillText(score_text, width-200, 20);
-//Writes Snake size to the screen every time a new cell is added to it
-          var snakeSize_text = "Snake Size: " +                                     mySnakeArray.length;
+//Writes the Snake size to the screen every time a new cell is added to it to add extra functionality to the game
+          var snakeSize_text = "Your Snake Size: " +                               mySnakeArray.length;
+//width needs to be at 40 as if it is any lower it starts going on top of the score display
           ctx.fillText(snakeSize_text, width-200, 40);
-//Writes amount of apples eaten to the screen
+//Writes amount of apples the snake has eaten to the screen
           var foodEaten_text = "Food Chomped: " +                                  (mySnakeArray.length-2) ;
           ctx.fillText(foodEaten_text, width-200, 60);
         
@@ -133,8 +137,11 @@ $(document).ready(function ()
  //Paints snake cells to red and the borders of the cells to black
         function paintCell(x, y)
         {
+   //This creates the colour of the snake
         ctx.fillStyle = "rgba(176,0,0,1)"
+    //This creates the shape of the snake   
         ctx.fillRect(x * cell_width, y * cell_width, cell_width,                                cell_width);
+    //This creates the border colour of the snake 
         ctx.strokeStyle = "black";
         ctx.strokeRect(x * cell_width, y * cell_width, cell_width,                              cell_width);
         }
@@ -172,7 +179,7 @@ $(document).keydown(function (e)
     
         <div>
  <!--  Draws the canvas at 600X600 -->
-          <canvas id="drawCanvas" width="600" height="600"></canvas>
+          <canvas id="drawCanvas" height="600" width="600" > </canvas>
    <!--  <menu> -->
          <!-- <button class='start'> Start Snake! </button> -->
          <!-- <button class='pause'>  Pause Snake! </button> -->
