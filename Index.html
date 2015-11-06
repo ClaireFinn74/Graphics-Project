@@ -28,8 +28,9 @@ $(document).ready(function ()
     var userscore;
     //This will be the name of the snake throughout
     var mySnakeArray;
-    //Snake's extra food will be a cherry in the game
+    //Snake's extra food in the game
     var cherry;
+    var tomato;
 
 //Starts the game and allows the snake to run right by default when the game starts 
    function start()
@@ -38,6 +39,7 @@ $(document).ready(function ()
     createSnake();
     createApple();
     createCherry();
+    createTomato();
     userscore = 0;
 
 
@@ -74,6 +76,16 @@ $(document).ready(function ()
     function createCherry()
     {
     snake_cherry =
+        {
+     x: Math.round(Math.random() * (width - cell_width) /                                                      cell_width),
+     y: Math.round(Math.random() * (height -                                                                  cell_width) / cell_width),
+        };
+    }
+    
+//creates the snake's tomato and keeps it within the borders
+     function createTomato()
+    {
+    snake_Tomato =
         {
      x: Math.round(Math.random() * (width - cell_width) /                                                      cell_width),
      y: Math.round(Math.random() * (height -                                                                  cell_width) / cell_width),
@@ -124,6 +136,12 @@ $(document).ready(function ()
            userscore=userscore+50;
            createCherry();
       }
+      else if (pop_x == snake_Tomato.x && pop_y == snake_Tomato.y)
+      {
+           var snake_tail = { x: pop_x, y: pop_y };
+           userscore=userscore+50;
+           createTomato();
+      }
         else
       {
         var snake_tail = mySnakeArray.pop();
@@ -142,6 +160,7 @@ $(document).ready(function ()
 //Writes score to the screen every time the snake eats an apple and also paints it
         paintCell(snake_apple.x, snake_apple.y);
         paintCell(snake_cherry.x, snake_cherry.y);
+        paintCell(snake_Tomato.x, snake_Tomato.y);
           var score_text = "Score: " + userscore;
           ctx.fillText(score_text, width-200, 20);
 //Writes the Snake size to the screen every time a new cell is added to it to add extra functionality to the game
